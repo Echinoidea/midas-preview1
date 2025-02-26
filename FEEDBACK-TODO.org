@@ -1,0 +1,95 @@
+#+title: Feedback List
+#+date: <2025-02-19 Wed>
+
+* [[file:~/Documents/MIDAS/Website Feedback_2.11.25.pdf][Feedback PDF]]
+
+* DONE 1.1
+CLOSED: [2025-02-20 Thu 00:15]
+* TODO 1.2
+* DONE 2.1
+CLOSED: [2025-02-18 Tue 22:11]
+** TODO Labels get cut off by chart div end
+* TODO 2.2
+* DONE 3.1
+CLOSED: [2025-02-19 Wed 23:16]
+* DONE 3.2
+CLOSED: [2025-02-19 Wed 23:11]
+* DONE 3.3
+CLOSED: [2025-02-19 Wed 23:25]
+* WAIT 3.4
+Waiting because we do not know the weights. Ask Joe.
+* HOLD 3.5
+Fonts tested on Firefox and Chrome - Fonts are all the same. Test on Safari.
+* DONE 3.6
+CLOSED: [2025-02-19 Wed 23:35]
+* DONE 3.7
+CLOSED: [2025-02-19 Wed 23:36]
+* DONE 3.8
+CLOSED: [2025-02-19 Wed 23:36]
+* DONE 3.9
+CLOSED: [2025-02-19 Wed 23:36]
+* [?] 3.10
+Why should the tile be green?
+* DONE 3.11
+CLOSED: [2025-02-19 Wed 23:16]
+* DONE 3.12
+CLOSED: [2025-02-19 Wed 23:11]
+* DONE 3.13
+CLOSED: [2025-02-19 Wed 23:25]
+* WAIT 3.14
+Waiting because we do not know the weights. Ask Joe.
+* HOLD 3.15
+Fonts tested on Firefox and Chrome - Fonts are all the same. Test on Safari.
+* DONE 3.16
+CLOSED: [2025-02-19 Wed 23:37]
+* DONE 3.17
+CLOSED: [2025-02-19 Wed 23:37]
+* DONE 3.18
+CLOSED: [2025-02-19 Wed 23:37]
+* DONE 3.19
+CLOSED: [2025-02-19 Wed 23:37]
+* DONE 3.20
+CLOSED: [2025-02-19 Wed 23:43]
+* [?] 3.21
+Why should the tile be green?
+* DONE 3.22
+CLOSED: [2025-02-19 Wed 23:47]
+* DONE 3.23
+CLOSED: [2025-02-19 Wed 23:17]
+* DONE 3.24
+CLOSED: [2025-02-19 Wed 23:12]
+* DONE 3.25
+CLOSED: [2025-02-19 Wed 23:25]
+* WAIT 3.26
+Waiting because we do not know the weights. Ask Joe.
+* HOLD 3.27
+Fonts tested on Firefox and Chrome - Fonts are all the same. Test on Safari.
+* DONE 3.28
+CLOSED: [2025-02-19 Wed 23:37]
+* DONE 3.29
+CLOSED: [2025-02-19 Wed 23:37]
+* DONE 3.30
+CLOSED: [2025-02-19 Wed 23:37]
+* DONE 3.31
+CLOSED: [2025-02-19 Wed 23:37]
+* DONE 3.32
+CLOSED: [2025-02-19 Wed 23:44]
+* [?] 3.33
+Why should the tile be green?
+* DONE 3.34
+CLOSED: [2025-02-19 Wed 23:47]
+* TODO 3.35
+* DONE 3.36
+CLOSED: [2025-02-19 Wed 23:12]
+* DONE 3.37
+CLOSED: [2025-02-19 Wed 23:49]
+* TODO 3.38
+* TODO 3.39
+* TODO 3.40
+* TODO 4.1
+* HOLD 5.1
+Holding because may not be ready by Friday.
+* TODO 5.2
+* NO 5.3
+Removing screenshot button entirely.
+CLOSED: [2025-02-19 Wed 23:12]

@@ -1,0 +1,69 @@
+
+* Complete feedback
+DEADLINE: <2025-02-21 Fri>
+
+**[[file:~/Documents/MIDAS/Website Feedback_2.11.25.pdf][Feedback PDF]]
+
+* Redo database
+DEADLINE: <2025-03-01 Sat>
+** DONE Redo authentication
+CLOSED: [2025-02-16 Sun 00:23]
+** DONE Upload web inputs lookup table
+CLOSED: [2025-02-16 Sun 00:23]
+** DONE Upload midas risk lookup table
+*** Reformat CSV for upload
+*** Create temporary table
+*** Upload formatted CSV to temporary table
+*** Transfer temporary table to actual table
+
+** DONE Redo file upload
+*** Do matching locally
+
+** TODO Assert that lookup tables are creating accurate data compared to R
+** TODO Make unit tests for everything
+
+** DONE Redo RiskLookup upload without prisma and use pgsql copy instead, I think it messed stuff up. Run this query and you'll see duplicates
+Mon Feb 17 23:46:20 2025
+
+#+begin_src sql
+SELECT * FROM "RiskLookup"
+WHERE
+    "officeReferrals" = false
+    AND "suspensions" = false
+    AND "gender" = 'FEMALE'::"Gender"
+    AND "ethnicity" = 'HISPANIC'::"Ethnicity"
+    AND "ell" = true
+    AND "schoolLevel" = 'MIDDLE'::"SchoolLevel"
+    AND "mathRisk" = 'LOW'::"RiskLevel"
+    AND "readingRisk" = 'SOME'::"RiskLevel"
+    AND "mysaebrsEmo" = 'SOME'::"RiskLevel"
+    AND "mysaebrsSoc" = 'LOW'::"RiskLevel"
+    AND "mysaebrsAca" = 'SOME'::"RiskLevel"
+    AND "saebrsEmo" = 'SOME'::"RiskLevel"
+    AND "saebrsSoc" = 'SOME'::"RiskLevel"
+    AND "saebrsAca" = 'SOME'::"RiskLevel";
+#+end_src
+>
+| id     | officeReferrals | suspensions | gender | ethnicity | ell  | schoolLevel | mathRisk | readingRisk | mysaebrsEmo | mysaebrsSoc | mysaebrsAca | saebrsEmo | saebrsSoc | saebrsAca |
+| ------ | --------------- | ----------- | ------ | --------- | ---- | ----------- | -------- | ----------- | ----------- | ----------- | ----------- | --------- | --------- | --------- |
+| 775211 | false           | false       | FEMALE | HISPANIC  | true | MIDDLE      | LOW      | SOME        | SOME        | LOW         | SOME        | SOME      | SOME      | SOME      |
+| 539015 | false           | false       | FEMALE | HISPANIC  | true | MIDDLE      | LOW      | SOME        | SOME        | LOW         | SOME        | SOME      | SOME      | SOME      |
+| 66623  | false           | false       | FEMALE | HISPANIC  | true | MIDDLE      | LOW      | SOME        | SOME        | LOW         | SOME        | SOME      | SOME      | SOME      |
+| 302819 | false           | false       | FEMALE | HISPANIC  | true | MIDDLE      | LOW      | SOME        | SOME        | LOW         | SOME        | SOME      | SOME      | SOME      |
+
+The duplicate lookups have been fixed.
+
+* Okay, uploading is fixed, now optimizing for speed.
+** Indexing RiskLookup table: Time taken for uploading 500 rows CSV:
+*** Before: 500 rows takes 52 seconds.
+*** After: 500 rows takes 47 seconds. Insignifcant
+** Speed optimization went poorly. Don't worry about it right now. At least there aren't huge joins everywhere.
+
+* Setting up file uploading
+<2025-02-23 Sun>
+** Front-end
+*** Consistent font
+*** Use NextUI
+*** Use same colors
+** Back-end
+*** Get rid of convoluted parsing. Just give the api the whole file.

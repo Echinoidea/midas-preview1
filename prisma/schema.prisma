@@ -1,0 +1,132 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum SchoolLevel {
+  MIDDLE
+  ELEMENTARY
+  HIGH
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum Ethnicity {
+  WHITE
+  HISPANIC
+  OTHER_POC
+}
+
+enum RiskLevel {
+  LOW
+  SOME
+  HIGH
+}
+
+enum ConfidenceLevel {
+  LOW
+  SOME
+  HIGH
+}
+
+enum Factor {
+  MIDAS
+  STUDENT
+  TEACHER
+}
+
+model School {
+  id       Int       @id @default(autoincrement())
+  name     String
+  students Student[]
+  users    User[]
+}
+
+model RiskLookup {
+  id              Int         @id @default(autoincrement())
+  officeReferrals Boolean
+  suspensions     Boolean
+  gender          Gender
+  ethnicity       Ethnicity
+  ell             Boolean
+  schoolLevel     SchoolLevel
+  mathRisk        RiskLevel
+  readingRisk     RiskLevel
+  mysaebrsEmo     RiskLevel
+  mysaebrsSoc     RiskLevel
+  mysaebrsAca     RiskLevel
+  saebrsEmo       RiskLevel
+  saebrsSoc       RiskLevel
+  saebrsAca       RiskLevel
+
+  midasRisks      MidasRisk[]
+  students        Student[]
+}
+
+model Student {
+  id              Int       @id @default(autoincrement())
+  school          School    @relation(fields: [schoolId], references: [id])
+  schoolId        Int
+  schoolLevel     SchoolLevel
+  gradeLevel      Int
+  classroomId     String
+  studentId       String    @unique
+  gender          Gender
+  ethnicity       Ethnicity
+  ell             Boolean
+  officeReferrals Boolean
+  suspensions     Boolean
+  mathRisk        RiskLevel
+  readingRisk     RiskLevel
+  
+  // Foreign keys to the three precomputed risk rows.
+  midasRiskId     Int?      @unique
+  teacherRiskId   Int?      @unique
+  studentRiskId   Int?      @unique
+  
+  midasRisk       MidasRisk? @relation("MidasRiskRelation", fields: [midasRiskId], references: [id])
+  teacherRisk     MidasRisk? @relation("TeacherRiskRelation", fields: [teacherRiskId], references: [id])
+  studentRisk     MidasRisk? @relation("StudentRiskRelation", fields: [studentRiskId], references: [id])
+  
+  // This field records which lookup record was used to determine the risk rows.
+  riskLookupId    Int?
+  riskLookup      RiskLookup? @relation(fields: [riskLookupId], references: [id])
+}
+
+model MidasRisk {
+  id           Int         @id @default(autoincrement())
+  riskLookupId Int
+  riskLookup   RiskLookup  @relation(fields: [riskLookupId], references: [id])
+  factor       Factor      // Should be MIDAS, STUDENT, or TEACHER
+  value        Float       // Computed analytic value (if needed)
+  lower        Float       // Lower bound (if needed)
+  upper        Float       // Upper bound (if needed)
+  hasRisk      Boolean
+  riskLevel    RiskLevel
+  confidence   ConfidenceLevel
+  
+  // Inverse relations (optional, for querying from MidasRisk side)
+  midasStudent    Student?   @relation("MidasRiskRelation")
+  teacherStudent  Student?   @relation("TeacherRiskRelation")
+  studentStudent  Student?   @relation("StudentRiskRelation")
+}
+
+model User {
+  id             Int      @id @default(autoincrement())
+  email          String   @unique
+  username       String?  @unique
+  hashedPassword String
+  // Associate a user with a school (optional)
+  school         School?  @relation(fields: [schoolId], references: [id])
+  schoolId       Int?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
