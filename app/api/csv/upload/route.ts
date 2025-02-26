@@ -100,7 +100,7 @@ export async function POST(request: Request) {
       }
 
       // Query for all MidasRisk rows for these riskLookups
-      const riskLookupIds = riskLookups.map(r => r.id);
+      const riskLookupIds = riskLookups.map((r: any) => r.id);
       const midasRisks = await prisma.midasRisk.findMany({
         where: { riskLookupId: { in: riskLookupIds } },
       });
