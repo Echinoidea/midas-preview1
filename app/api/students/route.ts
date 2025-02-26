@@ -47,7 +47,7 @@ export async function GET(request: Request) {
       };
     };
 
-    const transformedStudents = students.map(student => ({
+    const transformedStudents = students.map((student: any) => ({
       studentid: student.studentId,           // assuming studentId in Prisma
       schoollevel: student.schoolLevel.toLowerCase(),
       gradelevel: student.gradeLevel,
